@@ -229,3 +229,4 @@ pip-selfcheck.json
 *.ods
 
 SheetGPT
+*.AppImage
