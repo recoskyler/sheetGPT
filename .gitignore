@@ -227,3 +227,5 @@ pip-selfcheck.json
 *.xlsx
 *.xlsm
 *.ods
+
+SheetGPT
