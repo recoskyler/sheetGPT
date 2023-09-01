@@ -2,11 +2,10 @@
 
 from os import name, system
 from os.path import exists, isfile
-from modules.spreadsheet import create_output_book, load_input_workbook, generate_result_path
-from modules.cell import set_cell_value, get_cell_value, get_inputs, get_next_column, get_numeric_value
-from modules.assistant import get_formatted_prompt, get_answer
-from modules.io import save_progress, save_and_close
-from modules.user_input import *
+from spreadsheet import create_output_book, load_input_workbook, generate_result_path
+from cell import set_cell_value, get_cell_value, get_inputs, get_next_column, get_numeric_value
+from assistant import get_formatted_prompt, get_answer
+from save import save_progress, save_and_close
 from re import split, search
 
 import flet as ft
