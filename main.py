@@ -182,7 +182,7 @@ def clear():
 try:
     clear()
 
-    print("\n\nSheetGPT v1.0.0 by recoskyler\n\n")
+    print("\n\nSheetGPT v0.1.0 by recoskyler\n\n")
 
     get_user_inputs()
     process_worksheet()
