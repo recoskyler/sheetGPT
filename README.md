@@ -11,6 +11,7 @@ Still in development, but can be used.
 - Python 3.7/3.8
 - pip
 - venv
+- Flet
 
 ## Development
 
@@ -59,3 +60,11 @@ Still in development, but can be used.
     ```bash
     python3 main.py
     ```
+
+## [LICENSE](https://github.com/recoskyler/sheetGPT/blob/main/LICENSE)
+
+[MIT License](https://github.com/recoskyler/sheetGPT/blob/main/LICENSE)
+
+## About
+
+Made by [recoskyler](https://github.com/recoskyler) - 2023
