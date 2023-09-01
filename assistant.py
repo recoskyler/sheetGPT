@@ -7,7 +7,6 @@ __all__ = ["get_formatted_prompt", "get_answer"]
 
 def get_formatted_prompt(prompt: str, input_values: object) -> str:
     formatted_prompt = prompt
-    index = int(search("(\$)([0-9]+)", formatted_prompt).group()[1:])
 
     while search("(\$)([0-9]+)", formatted_prompt) != None:
         match = search("(\$)([0-9]+)", formatted_prompt).group()
@@ -24,13 +23,8 @@ def get_formatted_prompt(prompt: str, input_values: object) -> str:
 
     return formatted_prompt
 
-def get_answer(prompt: str, system_prompt: str, model: str, api_key: str, cache: object) -> tuple:
+def get_answer(prompt: str, system_prompt: str, model: str, api_key: str) -> tuple:
     openai.api_key = api_key
-    prompt_hash = str(hash(prompt))
-
-    if prompt_hash in cache.keys():
-        print("Using cached answer...")
-        return (cache[prompt_hash], 0)
 
     try:
         print("Getting answer from ChatGPT...")
@@ -40,7 +34,5 @@ def get_answer(prompt: str, system_prompt: str, model: str, api_key: str, cache:
         print("Failed to get answer: ")
         print(e)
         return ("", 0)
-
-    cache[prompt_hash] = res
 
     return (res, 1)
