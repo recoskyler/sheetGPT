@@ -40,7 +40,7 @@ def get_numeric_value(coordinate: str) -> int:
     elif coordinate.isnumeric():
         return int(coordinate)
     else:
-        raise Exception("Invalid coordinate. Must be numeric (1), or alphabetic (A). Not both (A1)")
+        raise Exception("Invalid coordinate. Must be numeric (1), or alphabetic (A). Not both (A1): ", coordinate)
 
 def get_cell_value(worksheet, cell: str):
     if worksheet == None:

@@ -6,15 +6,11 @@ def save_progress(workbook, path: str):
     if workbook == None:
         raise TypeError("workbook must not be NoneType")
 
-    try:
-        print("\nSaving file...")
+    print("\nSaving file...")
 
-        workbook.save(path)
+    workbook.save(path)
 
-        print("\nResults saved to: " + path)
-    except Exception as e:
-        print("\nAn error occurred while saving\n\n")
-        print(e)
+    print("\nResults saved to: " + path)
 
 def save_and_close(workbook, result_book, result_path: str):
     try:
@@ -25,16 +21,12 @@ def save_and_close(workbook, result_book, result_path: str):
         print(e)
 
 
-    try:
-        if result_book != None:
-            print("\nSaving file...")
+    if result_book != None:
+        print("\nSaving file...")
 
-            result_book.save(result_path)
-            result_book.close()
+        result_book.save(result_path)
+        result_book.close()
 
-            print("\nResults saved to: " + result_path)
-        else:
-            print("\n\nNot saving...")
-    except Exception as e:
-        print("\nFailed to save and close result book\n")
-        print(e)
+        print("\nResults saved to: " + result_path)
+    else:
+        print("\n\nNot saving...")
