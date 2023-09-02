@@ -151,7 +151,7 @@ flet pack main.py --icon assets/icon.png --name SheetGPT --product-name SheetGPT
 
 #### Windows Executable
 
-```ps1
+```bat
 flet pack main.py --icon assets\icon.png --name SheetGPT --product-name SheetGPT --product-version v1.0.1 --file-version v1.0.1 --file-description SheetGPT --copyright MIT --add-data "assets;assets"
 ```
 
