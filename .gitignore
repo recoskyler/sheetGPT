@@ -226,6 +226,8 @@ pip-selfcheck.json
 
 *.xlsx
 *.xlsm
+*.xltx
+*.xltm
 *.ods
 
-SheetGPT
+*.AppImage

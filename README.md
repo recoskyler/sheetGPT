@@ -1,16 +1,66 @@
 # SheetGPT
 
-<img src="https://github.com/recoskyler/sheetGPT/blob/main/icon.png" data-canonical-src="https://github.com/recoskyler/sheetGPT/blob/main/icon.png" width="128" height="128" />
+<img src="https://github.com/recoskyler/sheetGPT/blob/main/assets/icon.png" data-canonical-src="https://github.com/recoskyler/sheetGPT/blob/main/assets/icon.png" width="128" height="128" />
 
 A visual tool for completing a specific column/row using the data from other columns/rows in a XLSX/XLSM file utilizing ChatGPT.
 
+<img src="https://github.com/recoskyler/sheetGPT/blob/main/assets/screenshot-1.png" data-canonical-src="https://github.com/recoskyler/sheetGPT/blob/main/assets/screenshot-1.png" />
+
+<img src="https://github.com/recoskyler/sheetGPT/blob/main/assets/screenshot-2.png" data-canonical-src="https://github.com/recoskyler/sheetGPT/blob/main/assets/screenshot-2.png" />
+
+## Example
+
+### Input table
+
+On "**Sheet A**"
+
+|Row v/Column >|A|B|C|D|
+|--:|--:|:-:|--:|--:|
+|**1**|**Release Year**|**Game**|**Character 1**|**Character 2**|
+|**2**|*1996*| |*Mario*|*Peach*|
+|**3**|*2015*|*SOMA*|*Simon Jarrett*|*Catherine Chun*|
+|**4**|*2017*| |*Link*|*Zelda*|
+|**5**|*2018*| |*Madeline*|*Theo*|
+``
+### SheetGPT configuration
+
+|Setting|Value|
+|---|--|
+|**Sheet**|`Sheet A`|
+|**Input columns**|`a,c,d`|
+|**Input starting position**|`2`|
+|**Input ending**|`5`|
+|**Output column**|`B`|
+|**Output row**|`2`|
+|**Output placement**|`Place on the next row`|
+|**ChatGPT Model**|`gpt-3.5-turbo-16k`|
+|**OpenAI API Key**|`<MY API KEY>`|
+|**System Prompt**|`You are a helpful assistant. You give only the answer, without forming a sentence. If you are not sure, try guessing. If you are still unsure about the answer, output '?'. If you don't know the answer, or if you cannot give a correct answer output '?'.`|
+|**Prompt**|`What is the game with the characters $1 and $2, released in $0? Output only the name of the game. If you are unsure, or you don't know, output a question mark "?"`|
+|**Skip existing results**|`Enabled`|
+|**Processing limit**|`2`|
+
+### Output table
+
+|Row v/Column >|A|B|C|D|
+|--:|--:|:-:|--:|--:|
+|**1**|**Release Year**|**Game**|**Character 1**|**Character 2**|
+|**2**|*1996*|Super Mario 64|*Mario*|*Peach*|
+|**3**|*2015*|*SOMA*|*Simon Jarrett*|*Catherine Chun*|
+|**4**|*2017*|The Legend of Zelda: Breath of the Wild|*Link*|*Zelda*|
+|**5**|*2018*| |*Madeline*|*Theo*|
+
+*As you can see, the last row was not completed as the* "**Processing limit**" *was set to* `2`
+
 ## Status
 
-Still in development, but can be used.
+**Stable**, can be used.
+
+**DO NOT FORGET TO BACK UP YOUR DATA BEFOREHAND**, even though a separate output file is being created, it is best to be safe.
 
 ## Usage
 
-1. Go to releases, and download the latest executable suitable for your platform.
+1. [Download the latest release](https://github.com/recoskyler/sheetGPT/releases/latest) suitable for your platform.
 2. Launch the executable.
 3. Choose an input file.
 4. Choose an output file.
@@ -48,7 +98,7 @@ Still in development, but can be used.
 2. Create a new virtual environment:
 
     ```bash
-    python3 -m venv env
+    python -m venv env
     ```
 
 3. Activate the virtual environment:
@@ -62,25 +112,25 @@ Still in development, but can be used.
     - Windows (Powershell)
 
     ```ps1
-    env/Scripts/Activate.ps1
+    .\env\Scripts\Activate.ps1
     ```
 
     - Windows (CMD)
 
     ```cmd
-    env/Scripts/activate.bat
+    .\env\Scripts\activate.bat
     ```
 
 4. Install dependencies:
 
     ```bash
-    pip3 install -r requirements.txt
+    pip install -r requirements.txt
     ```
 
 5. Run the script:
 
     ```bash
-    python3 main.py
+    python main.py
     ```
 
     Or to use hot-reload
@@ -91,20 +141,24 @@ Still in development, but can be used.
 
 ### Packaging
 
-#### Executable
+Executable will be created for your platform (for MacOS if you run it on MacOS, for Windows if you run it on Windows...).
 
-Executable will be created for your platform (for Linux if you run it on Linux, for Windows if you run it on Windows...).
+#### MacOS Executable
 
 ```bash
-flet pack main.py --icon icon.png --name SheetGPT --add-data "modules:modules"
+flet pack main.py --icon assets/icon.png --name SheetGPT --product-name SheetGPT --product-version v1.0.1 --copyright MIT --bundle-id com.recoskyler.sheetgpt --add-data "assets:assets"
 ```
 
-#### AppImage
+#### Windows Executable
 
-An AppImage will be created to be used with Linux.
+```bat
+flet pack main.py --icon assets\icon.png --name SheetGPT --product-name SheetGPT --product-version v1.0.1 --file-version v1.0.1 --file-description SheetGPT --copyright MIT --add-data "assets;assets"
+```
+
+#### Linux Executable
 
 ```bash
-ezpyi -A -i icon.png main.py SheetGPT
+flet pack main.py --icon assets/icon.png --name SheetGPT --add-data "assets:assets"
 ```
 
 ## [LICENSE](https://github.com/recoskyler/sheetGPT/blob/main/LICENSE)

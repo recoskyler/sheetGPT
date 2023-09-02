@@ -1034,13 +1034,19 @@ def main(page: ft.Page):
         [
             ft.Column(
                 controls=[
+                    ft.Image(
+                        src=f"/icon.png",
+                        width=64,
+                        height=64,
+                        fit=ft.ImageFit.CONTAIN,
+                    ),
                     ft.Text(
                         "SheetGPT",
                         style=ft.TextThemeStyle.HEADLINE_MEDIUM,
                         text_align=ft.TextAlign.CENTER
-                    ),
+                    )
                 ],
-                horizontal_alignment=ft.CrossAxisAlignment.STRETCH,
+                horizontal_alignment=ft.CrossAxisAlignment.STRETCH
             ),
             ft.Text("File configuration", style=ft.TextThemeStyle.TITLE_LARGE),
             ft.Text("Input file", style=ft.TextThemeStyle.TITLE_MEDIUM),
@@ -1148,4 +1154,4 @@ def main(page: ft.Page):
 
     page.add(root_container)
 
-ft.app(target=main)
+ft.app(target=main, assets_dir="assets")
