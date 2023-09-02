@@ -146,27 +146,19 @@ Executable will be created for your platform (for MacOS if you run it on MacOS, 
 #### MacOS Executable
 
 ```bash
-flet pack main.py --icon assets/icon.png --name SheetGPT --product-name SheetGPT --product-version v1.0.0 --copyright MIT --bundle-id com.recoskyler.sheetgpt
+flet pack main.py --icon assets/icon.png --name SheetGPT --product-name SheetGPT --product-version v1.0.1 --copyright MIT --bundle-id com.recoskyler.sheetgpt --add-data "assets:assets"
 ```
 
 #### Windows Executable
 
 ```ps1
-flet pack main.py --icon assets\icon.png --name SheetGPT --product-name SheetGPT --product-version v1.0.0 --file-version v1.0.0 --file-description SheetGPT --copyright MIT
+flet pack main.py --icon assets\icon.png --name SheetGPT --product-name SheetGPT --product-version v1.0.1 --file-version v1.0.1 --file-description SheetGPT --copyright MIT --add-data "assets;assets"
 ```
 
 #### Linux Executable
 
 ```bash
-flet pack main.py --icon assets/icon.png --name SheetGPT
-```
-
-#### Linux AppImage
-
-An AppImage will be created to be used with Linux.
-
-```bash
-ezpyi -A -i assets/icon.png main.py SheetGPT.AppImage
+flet pack main.py --icon assets/icon.png --name SheetGPT --add-data "assets:assets"
 ```
 
 ## [LICENSE](https://github.com/recoskyler/sheetGPT/blob/main/LICENSE)

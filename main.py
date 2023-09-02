@@ -1035,7 +1035,7 @@ def main(page: ft.Page):
             ft.Column(
                 controls=[
                     ft.Image(
-                        src=f"assets/icon.png",
+                        src=f"/icon.png",
                         width=64,
                         height=64,
                         fit=ft.ImageFit.CONTAIN,
@@ -1154,4 +1154,4 @@ def main(page: ft.Page):
 
     page.add(root_container)
 
-ft.app(target=main)
+ft.app(target=main, assets_dir="assets")
