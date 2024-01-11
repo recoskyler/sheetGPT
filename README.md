@@ -146,13 +146,13 @@ Executable will be created for your platform (for MacOS if you run it on MacOS, 
 #### MacOS Executable
 
 ```bash
-flet pack main.py --icon assets/icon.png --name SheetGPT --product-name SheetGPT --product-version v1.0.1 --copyright MIT --bundle-id com.recoskyler.sheetgpt --add-data "assets:assets"
+flet pack main.py --icon assets/icon.png --name SheetGPT --product-name SheetGPT --product-version v1.0.2 --copyright MIT --bundle-id com.recoskyler.sheetgpt --add-data "assets:assets"
 ```
 
 #### Windows Executable
 
 ```bat
-flet pack main.py --icon assets\icon.png --name SheetGPT --product-name SheetGPT --product-version v1.0.1 --file-version v1.0.1 --file-description SheetGPT --copyright MIT --add-data "assets;assets"
+flet pack main.py --icon assets\icon.png --name SheetGPT --product-name SheetGPT --product-version v1.0.2 --file-version v1.0.2 --file-description SheetGPT --copyright MIT --add-data "assets;assets"
 ```
 
 #### Linux Executable

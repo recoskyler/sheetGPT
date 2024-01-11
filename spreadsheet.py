@@ -6,7 +6,7 @@ from os import remove
 from os.path import splitext
 from shutil import copyfile
 
-__all__ = ["load_input_workbook", "create_result_book"]
+__all__ = ["load_input_workbook", "create_output_book", "generate_result_path"]
 
 def load_input_workbook(file_path: str):
     wb = None

@@ -40,7 +40,7 @@ workbook = None
 worksheet = None
 result_book = None
 result_sheet = None
-result_placement = None
+result_placement = "r"
 input_pos = ""
 cache = dict()
 limit = 0
@@ -110,7 +110,7 @@ def reset_globals():
     worksheet = None
     result_book = None
     result_sheet = None
-    result_placement = None
+    result_placement = "r"
     input_pos = ""
     cache = dict()
     limit = 0
@@ -167,7 +167,7 @@ def main(page: ft.Page):
         input_hash = str(hash(frozenset(input_values)))
         result_value = get_cell_value(worksheet=result_sheet, cell=(current_col + current_row))
 
-        if result_value == None or str(result_value).strip() == "" or not skip:
+        if result_value is None or str(result_value).strip() == "" or not skip:
             answer = ""
             processed_count = 0
 
@@ -183,7 +183,7 @@ def main(page: ft.Page):
                 answer = res[0]
                 processed_count = res[1]
 
-            set_cell_value(worksheet=result_sheet, cell=(current_col + current_row), value=answer)
+            set_cell_value(worksheet=result_sheet, cell=(str(current_col) + str(current_row)), value=answer)
 
             print("Answer: " + answer)
 
@@ -739,7 +739,7 @@ def main(page: ft.Page):
             ft.dropdown.Option("Place on the next column")
         ],
         col={"md": 4},
-        value="Place on the next row"
+        value="Place on the next row" if result_placement == "r" else "Place on the next column"
     )
 
     def api_key_changed(e):
@@ -876,6 +876,28 @@ def main(page: ft.Page):
         on_change=on_skip_changed
     )
 
+    def clear_fields(e):
+        reset_globals()
+
+        limit_field.value = limit
+        api_key_field.value = api_key
+        prompt_field.value = prompt
+        system_prompt_field.value = DEFAULT_SYSTEM_PROMPT
+        until_field.value = until
+        inputs_field.value = ",".join(inputs)
+        input_pos_field.value = input_pos
+        output_col_field.value = result_col
+        output_row_field.value = result_row
+        output_placement_dropdown.value = "Place on the next row"
+        model_dropdown.value = model
+        sheet_dropdown.value = None
+        input_text.value = "No input file selected"
+        output_text.value = "No output file selected"
+        skip_switch.value = skip
+
+        page.update()
+        check_validity()
+
     def start_processing(e):
         global file_path
         global result_path
@@ -929,6 +951,8 @@ def main(page: ft.Page):
         sheet_dropdown.disabled = True
         input_button.disabled = True
         output_button.disabled = True
+        reset_button.visible = False
+        reset_button.disabled = True
 
         page.update()
 
@@ -963,34 +987,18 @@ def main(page: ft.Page):
         api_key_field.disabled = False
         prompt_field.disabled = False
         system_prompt_field.disabled = False
-        until_field.disabled = True
+        until_field.disabled = False
         inputs_field.disabled = False
-        input_pos_field.disabled = True
+        input_pos_field.disabled = False
         output_col_field.disabled = False
         output_row_field.disabled = False
         output_placement_dropdown.disabled = False
         model_dropdown.disabled = False
-        sheet_dropdown.disabled = True
+        sheet_dropdown.disabled = False
         input_button.disabled = False
-        output_button.disabled = True
-
-        reset_globals()
-
-        limit_field.value = limit
-        api_key_field.value = api_key
-        prompt_field.value = prompt
-        system_prompt_field.value = DEFAULT_SYSTEM_PROMPT
-        until_field.value = until
-        inputs_field.value = ",".join(inputs)
-        input_pos_field.value = input_pos
-        output_col_field.value = result_col
-        output_row_field.value = result_row
-        output_placement_dropdown.value = "Place on the next row"
-        model_dropdown.value = model
-        sheet_dropdown.value = None
-        input_text.value = "No input file selected"
-        output_text.value = "No output file selected"
-        skip_switch.value = skip
+        output_button.disabled = False
+        reset_button.visible = True
+        reset_button.disabled = False
 
         page.update()
         check_validity()
@@ -1015,6 +1023,14 @@ def main(page: ft.Page):
         disabled=True,
         on_click=start_processing,
         col={"md": 3}
+    )
+
+    reset_button = ft.ElevatedButton(
+        "Clear fields",
+        disabled=True,
+        on_click=clear_fields,
+        col={"md": 3},
+        visible=False
     )
 
     stop_button = ft.OutlinedButton(
@@ -1129,6 +1145,7 @@ def main(page: ft.Page):
                 [
                     stop_button,
                     process_button,
+                    reset_button,
                     ft.Row(
                         [process_message],
                         col={"md": 8},
